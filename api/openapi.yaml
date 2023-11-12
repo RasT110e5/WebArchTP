@@ -4,16 +4,16 @@ info:
   title: ProductCatalog
   version: 1.0.0
 servers:
-- url: http://localhost:3000
+  - url: http://localhost:3000
 tags:
-- description: Every operation of the Tag resource.
-  name: Tags
-- description: Every operation of the Product resource.
-  name: Products
-- description: Every operation of the Category resource.
-  name: Categories
-- description: Every operation of the Alias resource.
-  name: Aliases
+  - description: Every operation of the Tag resource.
+    name: Tags
+  - description: Every operation of the Product resource.
+    name: Products
+  - description: Every operation of the Category resource.
+    name: Categories
+  - description: Every operation of the Alias resource.
+    name: Aliases
 paths:
   /products:
     get:
@@ -29,7 +29,7 @@ paths:
                 type: array
           description: Success
       tags:
-      - Products
+        - Products
       x-eov-operation-handler: controllers/ProductsController
     post:
       description: Creates a new product
@@ -55,21 +55,21 @@ paths:
         "415":
           description: Media Type not supported for request body
       tags:
-      - Products
+        - Products
       x-eov-operation-handler: controllers/ProductsController
   /products/{productId}:
     delete:
       description: Delete a product
       operationId: productsProductIdDELETE
       parameters:
-      - description: ID of the product to be deleted
-        explode: false
-        in: path
-        name: productId
-        required: true
-        schema:
-          type: integer
-        style: simple
+        - description: ID of the product to be deleted
+          explode: false
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: integer
+          style: simple
       responses:
         "200":
           description: Success on deletion
@@ -86,20 +86,20 @@ paths:
                 $ref: '#/components/schemas/MessageError'
           description: A product with given ID could not be found
       tags:
-      - Products
+        - Products
       x-eov-operation-handler: controllers/ProductsController
     get:
       description: Get a specific product
       operationId: productsProductIdGET
       parameters:
-      - description: The ID of the product to get
-        explode: false
-        in: path
-        name: productId
-        required: true
-        schema:
-          type: integer
-        style: simple
+        - description: The ID of the product to get
+          explode: false
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: integer
+          style: simple
       responses:
         "200":
           content:
@@ -114,20 +114,20 @@ paths:
                 $ref: '#/components/schemas/MessageError'
           description: Product with that id could not be found
       tags:
-      - Products
+        - Products
       x-eov-operation-handler: controllers/ProductsController
     put:
       description: Modify a product.
       operationId: productsProductIdPUT
       parameters:
-      - description: ID of the product to be deleted
-        explode: false
-        in: path
-        name: productId
-        required: true
-        schema:
-          type: integer
-        style: simple
+        - description: ID of the product to be deleted
+          explode: false
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: integer
+          style: simple
       requestBody:
         content:
           application/json:
@@ -149,21 +149,21 @@ paths:
         "415":
           description: Media Type not supported for request body
       tags:
-      - Products
+        - Products
       x-eov-operation-handler: controllers/ProductsController
   /products/search:
     get:
       description: Search products by model name and aliases
       operationId: productsSearchGET
       parameters:
-      - description: Query string to search by
-        explode: true
-        in: query
-        name: query
-        required: false
-        schema:
-          type: string
-        style: form
+        - description: Query string to search by
+          explode: true
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+          style: form
       responses:
         "200":
           content:
@@ -174,7 +174,7 @@ paths:
                 type: array
           description: Success on search
       tags:
-      - Products
+        - Products
       x-eov-operation-handler: controllers/ProductsController
   /categories:
     get:
@@ -190,7 +190,7 @@ paths:
                 type: array
           description: Success
       tags:
-      - Categories
+        - Categories
       x-eov-operation-handler: controllers/CategoriesController
     post:
       description: Creates a new category
@@ -212,21 +212,21 @@ paths:
         "415":
           description: Media Type not supported for request body
       tags:
-      - Categories
+        - Categories
       x-eov-operation-handler: controllers/CategoriesController
   /categories/{categoryName}:
     delete:
       description: Delete a category
       operationId: categoriesCategoryNameDELETE
       parameters:
-      - description: Name of the category to be deleted
-        explode: false
-        in: path
-        name: categoryName
-        required: true
-        schema:
-          type: string
-        style: simple
+        - description: Name of the category to be deleted
+          explode: false
+          in: path
+          name: categoryName
+          required: true
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           description: Success on deletion
@@ -243,20 +243,20 @@ paths:
                 $ref: '#/components/schemas/MessageError'
           description: A product with given ID could not be found
       tags:
-      - Categories
+        - Categories
       x-eov-operation-handler: controllers/CategoriesController
     put:
       description: Modify a category
       operationId: categoriesCategoryNamePUT
       parameters:
-      - description: The category name that will change its parent category
-        explode: false
-        in: path
-        name: categoryName
-        required: true
-        schema:
-          type: string
-        style: simple
+        - description: The category name that will change its parent category
+          explode: false
+          in: path
+          name: categoryName
+          required: true
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json:
@@ -279,7 +279,7 @@ paths:
         "415":
           description: Media Type not supported for request body
       tags:
-      - Categories
+        - Categories
       x-eov-operation-handler: controllers/CategoriesController
   /tags:
     get:
@@ -295,21 +295,21 @@ paths:
                 type: array
           description: Success
       tags:
-      - Tags
+        - Tags
       x-eov-operation-handler: controllers/TagsController
   /alias:
     get:
       description: Find all product aliases
       operationId: aliasGET
       parameters:
-      - description: Flag to filter and bring only aliases mapped to a product
-        explode: true
-        in: query
-        name: mappedOnly
-        required: false
-        schema:
-          type: boolean
-        style: form
+        - description: Flag to filter and bring only aliases mapped to a product
+          explode: true
+          in: query
+          name: mappedOnly
+          required: false
+          schema:
+            type: boolean
+          style: form
       responses:
         "200":
           content:
@@ -320,7 +320,7 @@ paths:
                 type: array
           description: Success
       tags:
-      - Aliases
+        - Aliases
       x-eov-operation-id: aliasGET
       x-eov-operation-handler: controllers/AliasesController
   /alias/{aliasName}:
@@ -328,22 +328,22 @@ paths:
       description: Map an alias to a product
       operationId: aliasAliasNamePUT
       parameters:
-      - description: The name of the alias to map
-        explode: false
-        in: path
-        name: aliasName
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The product id to mapped this alias to
-        explode: true
-        in: query
-        name: productId
-        required: false
-        schema:
-          type: integer
-        style: form
+        - description: The name of the alias to map
+          explode: false
+          in: path
+          name: aliasName
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The product id to mapped this alias to
+          explode: true
+          in: query
+          name: productId
+          required: false
+          schema:
+            type: integer
+          style: form
       responses:
         "200":
           content:
@@ -358,7 +358,7 @@ paths:
                 $ref: '#/components/schemas/MessageError'
           description: "Validation errors, like product could not be found."
       tags:
-      - Aliases
+        - Aliases
       x-eov-operation-handler: controllers/AliasesController
   /alias/search:
     get:
@@ -366,14 +366,14 @@ paths:
         is not found
       operationId: aliasSearchGET
       parameters:
-      - description: Alias to search by
-        explode: true
-        in: query
-        name: alias
-        required: false
-        schema:
-          type: string
-        style: form
+        - description: Alias to search by
+          explode: true
+          in: query
+          name: alias
+          required: false
+          schema:
+            type: string
+          style: form
       responses:
         "200":
           content:
@@ -389,7 +389,7 @@ paths:
           description: "Product could not be found in search by alias, this alias\
             \ is saved for mapping"
       tags:
-      - Aliases
+        - Aliases
       x-eov-operation-handler: controllers/AliasesController
 components:
   schemas:
@@ -430,13 +430,13 @@ components:
       description: A product in the catalog, with its category and tags
       example:
         taggedBy:
-        - Samsung
-        - SmartTV
+          - Samsung
+          - SmartTV
         marketPrice: 300
         creator: creator
         aliases:
-        - Samsung HWTK523 Display
-        - Samsung SmartTv 46" TV
+          - Samsung HWTK523 Display
+          - Samsung SmartTv 46" TV
         weight: 1.6
         model: Samsung 46" TV
         id: 1

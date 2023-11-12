@@ -2,15 +2,14 @@
 const Service = require('./Service');
 
 /**
-* Find all products
-*
-* returns List
-* */
+ * Find all products
+ *
+ * returns List
+ * */
 const productsGET = () => new Promise(
   async (resolve, reject) => {
     try {
-      resolve(Service.successResponse({
-      }));
+      resolve(Service.successResponse({}));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
@@ -20,12 +19,12 @@ const productsGET = () => new Promise(
   },
 );
 /**
-* Creates a new product
-*
-* modifyProductDto ModifyProductDto  (optional)
-* returns Product
-* */
-const productsPOST = ({ modifyProductDto }) => new Promise(
+ * Creates a new product
+ *
+ * modifyProductDto ModifyProductDto  (optional)
+ * returns Product
+ * */
+const productsPOST = ({modifyProductDto}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -40,12 +39,12 @@ const productsPOST = ({ modifyProductDto }) => new Promise(
   },
 );
 /**
-* Delete a product
-*
-* productId Integer ID of the product to be deleted
-* no response value expected for this operation
-* */
-const productsProductIdDELETE = ({ productId }) => new Promise(
+ * Delete a product
+ *
+ * productId Integer ID of the product to be deleted
+ * no response value expected for this operation
+ * */
+const productsProductIdDELETE = ({productId}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -60,12 +59,12 @@ const productsProductIdDELETE = ({ productId }) => new Promise(
   },
 );
 /**
-* Get a specific product
-*
-* productId Integer The ID of the product to get
-* returns Product
-* */
-const productsProductIdGET = ({ productId }) => new Promise(
+ * Get a specific product
+ *
+ * productId Integer The ID of the product to get
+ * returns Product
+ * */
+const productsProductIdGET = ({productId}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -80,13 +79,13 @@ const productsProductIdGET = ({ productId }) => new Promise(
   },
 );
 /**
-* Modify a product.
-*
-* productId Integer ID of the product to be deleted
-* modifyProductDto ModifyProductDto  (optional)
-* returns Product
-* */
-const productsProductIdPUT = ({ productId, modifyProductDto }) => new Promise(
+ * Modify a product.
+ *
+ * productId Integer ID of the product to be deleted
+ * modifyProductDto ModifyProductDto  (optional)
+ * returns Product
+ * */
+const productsProductIdPUT = ({productId, modifyProductDto}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -102,12 +101,12 @@ const productsProductIdPUT = ({ productId, modifyProductDto }) => new Promise(
   },
 );
 /**
-* Search products by model name and aliases
-*
-* query String Query string to search by (optional)
-* returns List
-* */
-const productsSearchGET = ({ query }) => new Promise(
+ * Search products by model name and aliases
+ *
+ * query String Query string to search by (optional)
+ * returns List
+ * */
+const productsSearchGET = ({query}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({

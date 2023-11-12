@@ -1,5 +1,5 @@
 ###
-GET http://localhost:3000/alias
+GET http://localhost:3000/alias?test=unkown
 
 ###
 GET http://localhost:3000/alias/search
