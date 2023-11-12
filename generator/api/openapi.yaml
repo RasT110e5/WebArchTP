@@ -393,11 +393,10 @@ paths:
 components:
   schemas:
     Tag:
-      description: "A tag for the products in the catalog, used to group the products\
-        \ regardless of category."
+      description: "A tag for the products in the catalog, used to group the products regardless of category."
       example:
-        description: description
-        id: id
+        description: A display that is capable of using internet services, like Netflix.
+        id: SmartTv
       properties:
         id:
           type: string
@@ -407,8 +406,8 @@ components:
     Category:
       description: A category of products in the catalog.
       example:
-        name: name
-        parentCategory: parentCategory
+        name: TVs
+        parentCategory: Electronics
       properties:
         name:
           type: string
@@ -416,11 +415,10 @@ components:
           type: string
       type: object
     Alias:
-      description: A simple alias for a product representing the different names a
-        product may be known for.
+      description: A simple alias for a product representing the different names a product may be known for.
       example:
-        name: name
-        mappedTo: 0
+        name: Samsung SmartTv 46" TV
+        mappedTo: 1
       properties:
         name:
           type: string
@@ -428,25 +426,23 @@ components:
           type: integer
       type: object
     Product:
-      description: "A product in the catalog, with its category and tags"
+      description: A product in the catalog, with its category and tags
       example:
         taggedBy:
-        - description: description
-          id: id
-        - description: description
-          id: id
-        marketPrice: 1.4658129805029452
+        - Samsung
+        - SmartTV
+        marketPrice: 300
         creator: creator
         aliases:
-        - aliases
-        - aliases
-        weight: 6.027456183070403
-        model: model
-        id: 0
+        - Samsung HWTK523 Display
+        - Samsung SmartTv 46" TV
+        weight: 1.6
+        model: Samsung 46" TV
+        id: 1
         category:
-          name: name
-          parentCategory: parentCategory
-        type: type
+          name: Display
+          parentCategory: Electronics
+        type: High-End Electronics
       properties:
         id:
           type: integer
@@ -464,7 +460,7 @@ components:
           type: string
         taggedBy:
           items:
-            $ref: '#/components/schemas/Tag'
+            type: string
           type: array
         aliases:
           items:
@@ -472,13 +468,13 @@ components:
           type: array
       type: object
     ModifyProductDto:
-      description: A product creation request.
+      description: A product modification request.
       example:
-        marketPrice: 6.027456183070403
-        weight: 0.8008281904610115
-        model: model
-        category: category
-        type: type
+        marketPrice: 129.99
+        weight: 5.6
+        model: Samsung HD 46" TV
+        category: Display
+        type: High-End Electronic
       properties:
         model:
           type: string
@@ -492,6 +488,9 @@ components:
           type: number
       type: object
     MessageError:
+      example:
+        code: 400
+        message: The provided arguments are incorrect.
       properties:
         code:
           format: int32
@@ -500,9 +499,9 @@ components:
           type: string
       type: object
     ModifyParentCategoryDto:
-      description: A product creation request.
+      description: A category modification request.
       example:
-        parentCategory: parentCategory
+        parentCategory: Computers
       properties:
         parentCategory:
           type: string
@@ -510,8 +509,8 @@ components:
     CreateCategoryDto:
       description: A product creation request.
       example:
-        name: name
-        parentCategory: parentCategory
+        name: Displays
+        parentCategory: Electronics
       properties:
         name:
           type: string
