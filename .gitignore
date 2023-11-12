@@ -1,0 +1,8 @@
+#Project
+.idea
+
+#npm
+node_modules
+
+#logs
+*.log
