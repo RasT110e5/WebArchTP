@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const OpenApiValidator = require('express-openapi-validator');
 const logger = require('./logger');
-const alias = require('./controllers/AliasesController')
+const config = require('./config')
 
 class ExpressServer {
   constructor(port, openApiYaml) {
@@ -32,15 +32,15 @@ class ExpressServer {
     this.app.use(cookieParser());
     this.app.get('/openapi', (req, res) => res.sendFile((path.join(__dirname, 'api', 'openapi.yaml'))));
     this.app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(this.schema));
-    this.app.use('/alias', alias.aliasGET)
   }
 
   launch() {
-    // this.app.use(
-    //   OpenApiValidator.middleware({
-    //     apiSpec: this.openApiPath
-    //   }),
-    // )
+    this.app.use(
+      OpenApiValidator.middleware({
+        apiSpec: this.openApiPath,
+        operationHandlers: config.PROJECT_DIR
+      }),
+    )
     this.app.use((err, req, res, next) => {
       res.status(err.status || 500).json({
         message: err.message,

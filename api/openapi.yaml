@@ -321,6 +321,7 @@ paths:
           description: Success
       tags:
       - Aliases
+      x-eov-operation-id: aliasGET
       x-eov-operation-handler: controllers/AliasesController
   /alias/{aliasName}:
     put:

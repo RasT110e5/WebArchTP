@@ -1,21 +1,19 @@
-const { transports, createLogger, format } = require('winston');
+const {transports, createLogger, format} = require('winston');
 
 const logger = createLogger({
   level: 'info',
   format: format.combine(
+    format.cli(),
+    format.errors({stack: true}),
     format.timestamp(),
-    format.json(),
+    // format.json(),
   ),
-  defaultMeta: { service: 'user-service' },
+  defaultMeta: {service: 'product-api'},
   transports: [
     new transports.Console(),
-    new transports.File({ filename: 'error.log', level: 'error', timestamp: true }),
-    new transports.File({ filename: 'combined.log', timestamp: true }),
+    new transports.File({filename: 'error.log', level: 'error', timestamp: true}),
+    new transports.File({filename: 'combined.log', timestamp: true}),
   ],
 });
-
-if (process.env.NODE_ENV !== 'production') {
-  logger.add(new transports.Console({ format: format.simple() }));
-}
 
 module.exports = logger;

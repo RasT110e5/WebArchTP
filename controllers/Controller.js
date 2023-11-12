@@ -7,10 +7,10 @@ const logger = require('../logger');
 class Controller {
   static sendResponse(response, payload) {
     /**
-    * The default response-code is 200. We want to allow to change that. in That case,
-    * payload will be an object consisting of a code and a payload. If not customized
-    * send 200 and the payload as received in this method.
-    */
+     * The default response-code is 200. We want to allow to change that. in That case,
+     * payload will be an object consisting of a code and a payload. If not customized
+     * send 200 and the payload as received in this method.
+     */
     response.status(payload.code || 200);
     const responsePayload = payload.payload !== undefined ? payload.payload : payload;
     if (responsePayload instanceof Object) {
@@ -30,16 +30,16 @@ class Controller {
   }
 
   /**
-  * Files have been uploaded to the directory defined by config.js as upload directory
-  * Files have a temporary name, that was saved as 'filename' of the file object that is
-  * referenced in request.files array.
-  * This method finds the file and changes it to the file name that was originally called
-  * when it was uploaded. To prevent files from being overwritten, a timestamp is added between
-  * the filename and its extension
-  * @param request
-  * @param fieldName
-  * @returns {string}
-  */
+   * Files have been uploaded to the directory defined by config.js as upload directory
+   * Files have a temporary name, that was saved as 'filename' of the file object that is
+   * referenced in request.files array.
+   * This method finds the file and changes it to the file name that was originally called
+   * when it was uploaded. To prevent files from being overwritten, a timestamp is added between
+   * the filename and its extension
+   * @param request
+   * @param fieldName
+   * @returns {string}
+   */
   static collectFile(request, fieldName) {
     let uploadedFileName = '';
     if (request.files && request.files.length > 0) {
@@ -70,8 +70,8 @@ class Controller {
 
   static collectRequestParams(request) {
     const requestParams = {};
-    if (request.openapi.schema.requestBody !== undefined) {
-      const { content } = request.openapi.schema.requestBody;
+    if (request.openapi.schema.requestBody !== null) {
+      const {content} = request.openapi.schema.requestBody;
       if (content['application/json'] !== undefined) {
         const requestBodyName = camelCase(this.getRequestBodyName(request));
         requestParams[requestBodyName] = request.body;
@@ -88,16 +88,17 @@ class Controller {
         );
       }
     }
-
-    request.openapi.schema.parameters.forEach((param) => {
-      if (param.in === 'path') {
-        requestParams[param.name] = request.openapi.pathParams[param.name];
-      } else if (param.in === 'query') {
-        requestParams[param.name] = request.query[param.name];
-      } else if (param.in === 'header') {
-        requestParams[param.name] = request.headers[param.name];
-      }
-    });
+    if (request.openapi.schema.parameters !== undefined) {
+      request.openapi.schema.parameters.forEach((param) => {
+        if (param.in === 'path') {
+          requestParams[param.name] = request.openapi.pathParams[param.name];
+        } else if (param.in === 'query') {
+          requestParams[param.name] = request.query[param.name];
+        } else if (param.in === 'header') {
+          requestParams[param.name] = request.headers[param.name];
+        }
+      });
+    }
     return requestParams;
   }
 
@@ -107,6 +108,7 @@ class Controller {
       Controller.sendResponse(response, serviceResponse);
     } catch (error) {
       logger.error("Error while processing request", error)
+      logger.error(error.stack)
       Controller.sendError(response, error);
     }
   }
