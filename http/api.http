@@ -1,0 +1,53 @@
+###
+GET http://localhost:3000/alias
+
+###
+GET http://localhost:3000/alias/search
+
+###
+PUT http://localhost:3000/alias/{{aliasName}}
+
+###
+GET http://localhost:3000/categories
+
+###
+DELETE http://localhost:3000/categories/{{categoryName}}
+
+###
+GET http://localhost:3000/products
+
+###
+GET http://localhost:3000/products/search
+
+###
+GET http://localhost:3000/products/{{productId}}
+
+###
+DELETE http://localhost:3000/products/{{productId}}
+
+###
+GET http://localhost:3000/tags
+
+###
+POST http://localhost:3000/categories
+Content-Type: application/json
+
+{}
+
+###
+PUT http://localhost:3000/categories/{{categoryName}}
+Content-Type: application/json
+
+{}
+
+###
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{}
+
+###
+PUT http://localhost:3000/products/{{productId}}
+Content-Type: application/json
+
+{}
