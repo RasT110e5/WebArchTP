@@ -3,6 +3,7 @@
 
 # Dependencies
 /node_modules
+generator/node_modules
 
 # IDE
 .idea
