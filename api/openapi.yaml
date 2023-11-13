@@ -196,6 +196,7 @@ paths:
       description: Creates a new category
       operationId: createNewCategory
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -203,6 +204,10 @@ paths:
       responses:
         "201":
           description: Success on creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
         "400":
           content:
             application/json:
@@ -407,6 +412,7 @@ components:
           type: string
         parentCategory:
           type: string
+          nullable: true
       type: object
     Alias:
       description: A simple alias for a product representing the different names a product may be known for.
@@ -528,4 +534,5 @@ components:
           type: string
         parentCategory:
           type: string
+          nullable: true
       type: object

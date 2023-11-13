@@ -48,13 +48,6 @@ const aliasesArray = [
 const persistedAliases = new Map()
 aliasesArray.forEach(alias => persistedAliases.set(alias.id, alias))
 
-/**
- * Map an alias to a product
- *
- * aliasId Integer The id of the alias to map
- * productId Integer The product id to mapped this alias to (optional)
- * returns Alias
- * */
 const mapAliasToProduct = ({aliasId, productId}) => new Promise(
     async (resolve, reject) => {
       let aliasToMap = [...persistedAliases.values()].find(alias => alias.id === aliasId)
@@ -68,12 +61,7 @@ const mapAliasToProduct = ({aliasId, productId}) => new Promise(
     }
   )
 ;
-/**
- * Find all product aliases
- *
- * mappedOnly Boolean Flag to filter and bring only aliases mapped to a product (optional)
- * returns List
- * */
+
 const findAllAliases = ({mappedOnly}) => new Promise(
     async (resolve, reject) => {
       let aliasesToReturn = [...persistedAliases.values()];
@@ -83,20 +71,13 @@ const findAllAliases = ({mappedOnly}) => new Promise(
   )
 ;
 
-/**
- * Find a product by alias only and create the alias if a product is not found
- *
- * dto Dto with search data
- * returns Product
- * returns Alias
- * */
 const searchProductByAlias = ({body}) => new Promise(
   async (resolve, reject) => {
     let alias = [...persistedAliases.values()].find(alias => alias.name === body.name && alias.seller === body.seller)
     if (alias === undefined) {
       let newAlias = saveNewAlias(body.name, body.seller);
       persistedAliases.set(newAlias.id, newAlias)
-      resolve(Service.successResponse(newAlias));
+      resolve(Service.notFoundResponse(newAlias));
     } else {
       if (alias.mappedTo === null)
         resolve(Service.successResponse({}));
@@ -104,7 +85,6 @@ const searchProductByAlias = ({body}) => new Promise(
         //TODO get the product from different service
         resolve(Service.successResponse({}));
     }
-    resolve(Service.successResponse({}));
   },
 );
 
@@ -117,7 +97,6 @@ function saveNewAlias(name, seller) {
     mappedTo: null
   };
 }
-
 
 module.exports = {
   mapAliasToProduct,

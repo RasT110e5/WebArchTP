@@ -1,84 +1,93 @@
 const Service = require('./Service');
 
-/**
- * Delete a category
- *
- * categoryName String Name of the category to be deleted
- * no response value expected for this operation
- * */
+const categoriesArray = [
+  {
+    "parentCategory": "Wooden",
+    "name": "Small"
+  },
+  {
+    "parentCategory": "Steel",
+    "name": "Bespoke"
+  },
+  {
+    "parentCategory": "Frozen",
+    "name": "Intelligent"
+  },
+  {
+    "name": "Wooden",
+    "parentCategory": null
+  },
+  {
+    "name": "Steel",
+    "parentCategory": null
+  },
+  {
+    "name": "Frozen",
+    "parentCategory": null
+  }
+]
+const categoriesPersisted = new Map()
+categoriesArray.forEach(category => categoriesPersisted.set(category.name, category))
+
 const deleteACategory = ({categoryName}) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        categoryName,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+    if (categoryExists(categoryName)) {
+      categoriesPersisted.delete(categoryName)
+      resolve(Service.emptySuccessResponse());
+    } else
+      reject(Service.badRequestResponse(`Category with name ${categoryName} already exists`))
   },
 );
-/**
- * Modify a category
- *
- * categoryName String The category name that will change its parent category
- * modifyParentCategoryDto ModifyParentCategoryDto  (optional)
- * returns Category
- * */
-const modifyACategory = ({categoryName, modifyParentCategoryDto}) => new Promise(
+
+const modifyACategory = ({categoryName, body}) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        categoryName,
-        modifyParentCategoryDto,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+    if (!categoryExists(categoryName))
+      reject(Service.badRequestResponse(`Category with name ${categoryName} does not exist`))
+    else {
+      if (!categoryExists(body.parentCategory))
+        reject(Service.badRequestResponse(`Parent Category with name ${body.parentCategory} does not exist`))
+      else {
+        let categoryToModify = categoriesPersisted.get(categoryName)
+        categoryToModify.parentCategory = body.parentCategory
+        resolve(Service.successResponse({categoryToModify}));
+      }
     }
   },
 );
-/**
- * Find all categories
- *
- * returns List
- * */
+
 const findAllCategories = () => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({}));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+    resolve(Service.successResponse([...categoriesPersisted.values()]));
   },
 );
-/**
- * Creates a new category
- *
- * createCategoryDto CreateCategoryDto  (optional)
- * no response value expected for this operation
- * */
-const createNewCategory = ({createCategoryDto}) => new Promise(
+
+const createNewCategory = ({body}) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        createCategoryDto,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
+    if (categoryExists(body.name))
+      reject(Service.badRequestResponse(`Category with name ${body.name} already exists`))
+    else {
+      if (body.parentCategory !== undefined && !categoryExists(body.parentCategory)) {
+        reject(Service.badRequestResponse(`Parent Category with name ${body.name} does not exist`))
+      } else {
+        let newCategory = saveNewCategory(body);
+        resolve(Service.createdResponse({newCategory}));
+      }
     }
   },
 );
+
+function categoryExists(name) {
+  return categoriesPersisted.has(name)
+}
+
+function saveNewCategory(body) {
+  let newCategory = {
+    name: body.name,
+    parentCategory: body.parentCategory || null
+  }
+  categoriesPersisted.set(newCategory.name, newCategory)
+  return newCategory;
+}
 
 module.exports = {
   deleteACategory,

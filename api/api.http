@@ -37,11 +37,36 @@ Content-Type: application/json
   "seller": "Musimundo"
 }
 
-###
+### find all categories
 GET http://localhost:3000/categories
 
-###
-DELETE http://localhost:3000/categories/Electronics
+### create a new parent category
+POST http://localhost:3000/categories
+Content-Type: application/json
+
+{
+  "name": "Electronics"
+}
+
+### create a new category
+POST http://localhost:3000/categories
+Content-Type: application/json
+
+{
+  "name": "Displays",
+  "parentCategory": "Electronics"
+}
+
+### delete a category
+DELETE http://localhost:3000/categories/Displays
+
+### update a category
+PUT http://localhost:3000/categories/Intelligent
+Content-Type: application/json
+
+{
+  "parentCategory": "Electronics"
+}
 
 ###
 GET http://localhost:3000/products
@@ -57,18 +82,6 @@ DELETE http://localhost:3000/products/1
 
 ###
 GET http://localhost:3000/tags
-
-###
-POST http://localhost:3000/categories
-Content-Type: application/json
-
-{}
-
-###
-PUT http://localhost:3000/categories/Electronics
-Content-Type: application/json
-
-{}
 
 ###
 POST http://localhost:3000/products
