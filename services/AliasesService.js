@@ -1,4 +1,5 @@
 const Service = require('./Service');
+const productService = require('./ProductsService')
 
 const aliasesArray = [
   {
@@ -54,9 +55,12 @@ const mapAliasToProduct = ({aliasId, productId}) => new Promise(
       if (aliasToMap === undefined)
         reject(Service.badRequestResponse(`Alias with id ${aliasId} could not be found`))
       else {
-        //TODO: check for product existence
-        aliasToMap.mappedTo = productId
-        resolve(Service.successResponse(aliasToMap));
+        if (!productService.existsById(productId)) {
+          reject(Service.badRequestResponse(`Product with id ${productId} could not be found`))
+        } else {
+          aliasToMap.mappedTo = productId
+          resolve(Service.successResponse(aliasToMap));
+        }
       }
     }
   )
@@ -81,9 +85,11 @@ const searchProductByAlias = ({body}) => new Promise(
     } else {
       if (alias.mappedTo === null)
         resolve(Service.successResponse({}));
-      else
-        //TODO get the product from different service
-        resolve(Service.successResponse({}));
+      else if (!productService.existsById(alias.mappedTo)) {
+        reject(Service.badRequestResponse(`Product with id ${alias.mappedTo} could not be found on the database, report invalid state`))
+      } else {
+        resolve(Service.successResponse(productService.findProductById(alias.mappedTo)));
+      }
     }
   },
 );

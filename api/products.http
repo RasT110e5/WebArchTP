@@ -44,11 +44,39 @@ Content-Type: application/json
   "type": "Incredible"
 }
 
-###
-PUT http://localhost:3000/products/1
+### modify a product with an invalid Id
+PUT http://localhost:3000/products/-1111
 Content-Type: application/json
 
-{}
+{
+  "marketPrice": 94.00,
+  "creator": "Roque Sosa",
+  "weight": 773.00,
+  "model": "Towels",
+  "taggedBy": [
+    "On-Sale",
+    "Excellent Quality"
+  ],
+  "category": "Bath",
+  "type": "Incredible"
+}
+
+### modify a product with
+PUT http://localhost:3000/products/10
+Content-Type: application/json
+
+{
+  "marketPrice": 94.00,
+  "creator": "Roque Sosa",
+  "weight": 773.00,
+  "model": "Towels",
+  "taggedBy": [
+    "On-Sale",
+    "Excellent Quality"
+  ],
+  "category": "Bath",
+  "type": "Incredible"
+}
 
 ###
 GET http://localhost:3000/products/search

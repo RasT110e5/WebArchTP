@@ -7,6 +7,9 @@ GET http://localhost:3000/alias?mappedOnly=true
 ### map an alias to a product when the alias does not exists
 PUT http://localhost:3000/alias/-12?productId=1
 
+### map an alias to a product that does not exist
+PUT http://localhost:3000/alias/4?productId=12358
+
 ### map an alias to a product
 PUT http://localhost:3000/alias/4?productId=15
 

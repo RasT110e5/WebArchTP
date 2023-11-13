@@ -167,21 +167,41 @@ const deleteAProduct = ({productId}) => new Promise(
   },
 );
 
+function existsById(productId) {
+  return persistedProducts.has(productId);
+}
+
 const getASpecificProduct = ({productId}) => new Promise(
   async (resolve, reject) => {
-    if (persistedProducts.has(productId))
+    if (existsById(productId))
       resolve(Service.successResponse(persistedProducts.get(productId)))
     else
       reject(Service.badRequestResponse(`A product with id ${productId} does not exist`))
   },
 );
 
-const modifyAProduct = ({productId, modifyProductDto}) => new Promise(
+function findProductById(productId) {
+  return persistedProducts.get(productId);
+}
+
+const modifyAProduct = ({productId, body}) => new Promise(
   async (resolve, reject) => {
-    resolve(Service.successResponse({
-      productId,
-      modifyProductDto,
-    }));
+    if (!persistedProducts.has(productId))
+      reject(Service.badRequestResponse(`A product with ${productId} does not exist`))
+    else {
+      if (!categoryService.categoryExists(body.category))
+        reject(Service.badRequestResponse(`Category with name ${body.category} does not exist`))
+      else {
+        let productToModify = findProductById(productId);
+        productToModify.creator = body.creator
+        productToModify.weight = body.weight
+        productToModify.model = body.model
+        productToModify.taggedBy = body.taggedBy
+        productToModify.category = body.category
+        productToModify.type = body.type
+        resolve(Service.successResponse(productToModify));
+      }
+    }
   },
 );
 
@@ -197,7 +217,7 @@ function saveNewProduct(body) {
   const nextId = [...persistedProducts.keys()].reduce((a, b) => Math.max(a, b), -Infinity) + 1;
   let newProduct = {
     id: nextId,
-    markerPrice: body.markerPrice,
+    marketPrice: body.marketPrice,
     creator: body.creator,
     weight: body.weight,
     model: body.model,
@@ -216,4 +236,6 @@ module.exports = {
   getASpecificProduct,
   modifyAProduct,
   searchProductsByModelAndAliases,
+  existsById,
+  findProductById
 };
