@@ -1,122 +1,189 @@
 const Service = require('./Service');
 
-/**
- * Find all products
- *
- * returns List
- * */
+const productArray = [
+  {
+    "id": 10,
+    "marketPrice": 177.00,
+    "creator": "Tanya Abbott",
+    "aliases": [
+      "Elegant Frozen Tuna",
+      "Rustic Fresh Ball"
+    ],
+    "weight": 478.00,
+    "model": "Tuna",
+    "taggedBy": [
+      "New"
+    ],
+    "category": "Food",
+    "type": "Fantastic"
+  },
+  {
+    "id": 11,
+    "marketPrice": 579.00,
+    "creator": "Miguel Waelchi",
+    "aliases": [],
+    "weight": 831.00,
+    "model": "Pants",
+    "taggedBy": [
+      "New"
+    ],
+    "category": "Clothes",
+    "type": "Awesome"
+  },
+  {
+    "id": 12,
+    "marketPrice": 198.00,
+    "creator": "Mary Breitenberg",
+    "aliases": [],
+    "weight": 379.00,
+    "model": "Table",
+    "taggedBy": [
+      "Fancy",
+      "Unique"
+    ],
+    "category": "Small",
+    "type": "Oriental"
+  },
+  {
+    "id": 13,
+    "marketPrice": 94.00,
+    "creator": "Betsy Steuber",
+    "aliases": [],
+    "weight": 773.00,
+    "model": "Towels",
+    "taggedBy": [
+      "On-Sale",
+      "Excellent Quality"
+    ],
+    "category": "Bath",
+    "type": "Incredible"
+  },
+  {
+    "id": 14,
+    "marketPrice": 275.00,
+    "creator": "Mercedes Conroy Jr.",
+    "aliases": [],
+    "weight": 874.00,
+    "model": "Bike",
+    "taggedBy": [
+      "Monthly Payment"
+    ],
+    "category": "Steel",
+    "type": "Rustic"
+  },
+  {
+    "id": 15,
+    "marketPrice": 319.00,
+    "creator": "Cody Kilback",
+    "aliases": [],
+    "weight": 706.00,
+    "model": "Chair",
+    "taggedBy": [],
+    "category": "Wooden",
+    "type": "Elegant"
+  },
+  {
+    "id": 16,
+    "marketPrice": 719.00,
+    "creator": "Clayton Bradtke",
+    "aliases": [
+      "Fantastic Rubber Shoes"
+    ],
+    "weight": 353.00,
+    "model": "Shoes",
+    "taggedBy": [],
+    "category": "Clothes",
+    "type": "Tasty"
+  },
+  {
+    "id": 17,
+    "marketPrice": 76.00,
+    "creator": "Juan D'Amore",
+    "aliases": [],
+    "weight": 951.00,
+    "model": "Sausages",
+    "taggedBy": [
+      "Not-Meat"
+    ],
+    "category": "Frozen",
+    "type": "Refined"
+  },
+  {
+    "id": 18,
+    "marketPrice": 460.00,
+    "creator": "Mrs. Susie Pollich",
+    "aliases": [],
+    "weight": 224.00,
+    "model": "Shirt",
+    "taggedBy": [
+      "Luxury"
+    ],
+    "category": "Clothes",
+    "type": "Bespoke"
+  },
+  {
+    "id": 19,
+    "marketPrice": 417.00,
+    "creator": "Shirley Schmitt",
+    "aliases": [],
+    "weight": 272.00,
+    "model": "Chips",
+    "taggedBy": [
+      "Vegan"
+    ],
+    "category": "Food",
+    "type": "Electronic"
+  }
+]
+
+const persistedProducts = new Map()
+productArray.forEach(product => persistedProducts.set(product.id, product))
+
 const findAllProducts = () => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({}));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+    resolve(Service.successResponse([...persistedProducts.values()]));
   },
 );
-/**
- * Creates a new product
- *
- * modifyProductDto ModifyProductDto  (optional)
- * returns Product
- * */
+
 const createANewProduct = ({modifyProductDto}) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        modifyProductDto,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+    resolve(Service.successResponse({
+      modifyProductDto,
+    }));
   },
 );
-/**
- * Delete a product
- *
- * productId Integer ID of the product to be deleted
- * no response value expected for this operation
- * */
+
 const deleteAProduct = ({productId}) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        productId,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+    resolve(Service.successResponse({
+      productId,
+    }));
   },
 );
-/**
- * Get a specific product
- *
- * productId Integer The ID of the product to get
- * returns Product
- * */
+
 const getASpecificProduct = ({productId}) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        productId,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+    if (persistedProducts.has(productId))
+      resolve(Service.successResponse(persistedProducts.get(productId)))
+    else
+      reject(Service.badRequestResponse(`A product with id ${productId} does not exist`))
   },
 );
-/**
- * Modify a product.
- *
- * productId Integer ID of the product to be deleted
- * modifyProductDto ModifyProductDto  (optional)
- * returns Product
- * */
+
 const modifyAProduct = ({productId, modifyProductDto}) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        productId,
-        modifyProductDto,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+    resolve(Service.successResponse({
+      productId,
+      modifyProductDto,
+    }));
   },
 );
-/**
- * Search products by model name and aliases
- *
- * query String Query string to search by (optional)
- * returns List
- * */
+
 const searchProductsByModelAndAliases = ({query}) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        query,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+    resolve(Service.successResponse({
+      query,
+    }));
   },
 );
 

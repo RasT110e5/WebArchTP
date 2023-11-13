@@ -22,7 +22,8 @@ Content-Type: application/json
 DELETE http://localhost:3000/categories/Displays
 
 ### update a category
-PUT http://localhost:3000/categories/Intelligent
+PUT http://localhost:3000/categories/Steel
+
 Content-Type: application/json
 
 {

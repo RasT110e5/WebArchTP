@@ -4,13 +4,13 @@ const aliasesArray = [
   {
     "id": 1,
     "name": "Elegant Frozen Tuna",
-    "mappedTo": null,
+    "mappedTo": 10,
     "seller": "Bahringer LLC"
   },
   {
     "id": 2,
     "name": "Fantastic Rubber Shoes",
-    "mappedTo": null,
+    "mappedTo": 16,
     "seller": "Welch Group"
   },
   {
@@ -28,19 +28,19 @@ const aliasesArray = [
   {
     "id": 5,
     "name": "Rustic Fresh Ball",
-    "mappedTo": 1,
+    "mappedTo": 10,
     "seller": "Greenholt, Nader and Wilderman"
   },
   {
     "id": 6,
     "name": "Fantastic Granite Soap",
-    "mappedTo": 2,
+    "mappedTo": null,
     "seller": "Sipes, Franecki and Douglas"
   },
   {
     "id": 7,
     "name": "Luxurious Frozen Chicken",
-    "mappedTo": 3,
+    "mappedTo": null,
     "seller": "Russel Group"
   }
 ]

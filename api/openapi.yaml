@@ -107,7 +107,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Product'
           description: Success
-        "404":
+        "400":
           content:
             application/json:
               schema:
@@ -446,9 +446,7 @@ components:
         weight: 1.6
         model: Samsung 46" TV
         id: 1
-        category:
-          name: Display
-          parentCategory: Electronics
+        category: Display
         type: High-End Electronics
       properties:
         id:
@@ -456,7 +454,7 @@ components:
         model:
           type: string
         category:
-          $ref: '#/components/schemas/Category'
+          type: string
         weight:
           type: number
         type:

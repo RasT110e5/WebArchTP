@@ -11,7 +11,7 @@ const categoriesArray = [
   },
   {
     "parentCategory": "Frozen",
-    "name": "Intelligent"
+    "name": "Food"
   },
   {
     "name": "Wooden",
@@ -22,7 +22,15 @@ const categoriesArray = [
     "parentCategory": null
   },
   {
+    "name": "Clothes",
+    "parentCategory": null
+  },
+  {
     "name": "Frozen",
+    "parentCategory": null
+  },
+  {
+    "name": "Bath",
     "parentCategory": null
   }
 ]

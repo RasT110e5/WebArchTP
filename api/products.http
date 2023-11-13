@@ -1,0 +1,29 @@
+### find all products
+GET http://localhost:3000/products
+
+### find a specific product that does not exist
+GET http://localhost:3000/products/-1
+
+### find a specific product
+GET http://localhost:3000/products/10
+
+###
+GET http://localhost:3000/products/search
+
+###
+DELETE http://localhost:3000/products/1
+
+###
+GET http://localhost:3000/tags
+
+###
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{}
+
+###
+PUT http://localhost:3000/products/1
+Content-Type: application/json
+
+{}
