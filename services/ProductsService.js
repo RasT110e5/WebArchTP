@@ -155,9 +155,11 @@ const createANewProduct = ({modifyProductDto}) => new Promise(
 
 const deleteAProduct = ({productId}) => new Promise(
   async (resolve, reject) => {
-    resolve(Service.successResponse({
-      productId,
-    }));
+    if (persistedProducts.has(productId)) {
+      persistedProducts.delete(productId)
+      resolve(Service.emptySuccessResponse());
+    } else
+      reject(Service.badRequestResponse(`Product with id ${productId} dot not exist`))
   },
 );
 

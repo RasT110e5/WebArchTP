@@ -43,7 +43,7 @@ const deleteACategory = ({categoryName}) => new Promise(
       categoriesPersisted.delete(categoryName)
       resolve(Service.emptySuccessResponse());
     } else
-      reject(Service.badRequestResponse(`Category with name ${categoryName} already exists`))
+      reject(Service.badRequestResponse(`Category with name ${categoryName} does not exist`))
   },
 );
 

@@ -7,14 +7,8 @@ GET http://localhost:3000/products/-1
 ### find a specific product
 GET http://localhost:3000/products/10
 
-###
-GET http://localhost:3000/products/search
-
-###
-DELETE http://localhost:3000/products/1
-
-###
-GET http://localhost:3000/tags
+### delete a speciifc product
+DELETE http://localhost:3000/products/10
 
 ###
 POST http://localhost:3000/products
@@ -27,3 +21,9 @@ PUT http://localhost:3000/products/1
 Content-Type: application/json
 
 {}
+
+###
+GET http://localhost:3000/products/search
+
+###
+GET http://localhost:3000/tags
