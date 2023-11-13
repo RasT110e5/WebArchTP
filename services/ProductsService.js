@@ -210,7 +210,9 @@ const modifyAProduct = ({productId, body}) => new Promise(
 
 const searchProductsByModelAndAliases = ({query}) => new Promise(
   async (resolve, reject) => {
-    let results = findAll().filter(product => product.model.includes(query) || product.aliases.includes(query))
+    let results = findAll().filter(product => product.model.includes(query)).concat(
+      findAll().filter(product => product.aliases !== undefined && product.aliases.includes(query))
+    )
     resolve(Service.successResponse(results));
   },
 );

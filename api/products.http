@@ -11,7 +11,7 @@ GET http://localhost:3000/products/-1
 GET http://localhost:3000/products/10
 
 ### delete a speciifc product
-DELETE http://localhost:3000/products/10
+DELETE http://localhost:3000/products/13
 
 ### create a new product with an invalid category
 POST http://localhost:3000/products
@@ -64,7 +64,7 @@ Content-Type: application/json
   "type": "Incredible"
 }
 
-### modify a product with
+### modify a product
 PUT http://localhost:3000/products/10
 Content-Type: application/json
 
@@ -85,7 +85,7 @@ Content-Type: application/json
 GET http://localhost:3000/tags
 
 ### find products by model
-GET http://localhost:3000/products/search?query=Tuna
+GET http://localhost:3000/products/search?query=Shoes
 
 ### find products by alias
 GET http://localhost:3000/products/search?query=Rustic%20Fresh%20Ball

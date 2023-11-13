@@ -41,13 +41,6 @@ class ExpressServer {
     console.log(`Listening on port ${config.URL_PORT}`);
   }
 
-  async close() {
-    if (this.server !== undefined) {
-      await this.server.close();
-      console.log(`Server on port ${config.URL_PORT} shut down`);
-    }
-  }
-
   #importOpenApiSchema(openApiYaml) {
     try {
       this.schema = jsYaml.safeLoad(fs.readFileSync(openApiYaml));
