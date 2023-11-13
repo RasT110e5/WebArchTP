@@ -6,7 +6,6 @@ const logger = createLogger({
     format.cli(),
     format.errors({stack: true}),
     format.timestamp(),
-    // format.json(),
   ),
   defaultMeta: {service: 'product-api'},
   transports: [
