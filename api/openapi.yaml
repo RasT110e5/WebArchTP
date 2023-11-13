@@ -322,7 +322,7 @@ paths:
       tags:
         - Aliases
       x-eov-operation-handler: controllers/AliasesController
-  /alias/{aliasName}:
+  /alias/{aliasId}:
     put:
       description: Map an alias to a product
       operationId: mapAliasToProduct
@@ -330,16 +330,16 @@ paths:
         - description: The name of the alias to map
           explode: false
           in: path
-          name: aliasName
+          name: aliasId
           required: true
           schema:
-            type: string
+            type: integer
           style: simple
         - description: The product id to mapped this alias to
           explode: true
           in: query
           name: productId
-          required: false
+          required: true
           schema:
             type: integer
           style: form
@@ -360,19 +360,14 @@ paths:
         - Aliases
       x-eov-operation-handler: controllers/AliasesController
   /alias/search:
-    get:
-      description: Find a product by alias only and create the alias if a product
-        is not found
+    post:
+      description: Find a product by alias only and create the alias if a product is not found
       operationId: searchProductByAlias
-      parameters:
-        - description: Alias to search by
-          explode: true
-          in: query
-          name: alias
-          required: false
-          schema:
-            type: string
-          style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchByAliasDto'
       responses:
         "200":
           content:
@@ -385,8 +380,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Alias'
-          description: "Product could not be found in search by alias, this alias\
-            \ is saved for mapping"
+          description: Product could not be found in search by alias, this alias is saved for mapping
       tags:
         - Aliases
       x-eov-operation-handler: controllers/AliasesController
@@ -419,11 +413,18 @@ components:
       example:
         name: Samsung SmartTv 46" TV
         mappedTo: 1
+        seller: Bahringer LLC
+        id: 1
       properties:
+        id:
+          type: integer
         name:
           type: string
         mappedTo:
           type: integer
+          nullable: true
+        seller:
+          type: string
       type: object
     Product:
       description: A product in the catalog, with its category and tags
@@ -504,6 +505,17 @@ components:
         parentCategory: Computers
       properties:
         parentCategory:
+          type: string
+      type: object
+    SearchByAliasDto:
+      description: An alias search request.
+      example:
+        name: Rustic Fresh Ball
+        seller: Greenholt, Nader and Wilderman
+      properties:
+        name:
+          type: string
+        seller:
           type: string
       type: object
     CreateCategoryDto:

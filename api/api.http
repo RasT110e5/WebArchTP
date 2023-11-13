@@ -1,11 +1,41 @@
-###
+### find all aliases
 GET http://localhost:3000/alias
 
-###
-GET http://localhost:3000/alias/search
+### find all aliases that are mapped
+GET http://localhost:3000/alias?mappedOnly=true
 
-###
-PUT http://localhost:3000/alias/SamsungTv
+### map an alias to a product when the alias does not exists
+PUT http://localhost:3000/alias/-12?productId=1
+
+### map an alias to a product
+PUT http://localhost:3000/alias/1?productId=1
+
+### search for a product with an alias that is not mapped
+POST http://localhost:3000/alias/search
+Content-Type: application/json
+
+{
+  "name": "Fantastic Rubber Shoes",
+  "seller": "Welch Group"
+}
+
+### search for a product with an alias that exists and is mapped
+POST http://localhost:3000/alias/search
+Content-Type: application/json
+
+{
+  "name": "Rustic Fresh Ball",
+  "seller": "Greenholt, Nader and Wilderman"
+}
+
+### search for a product with an alias that does not exists
+POST http://localhost:3000/alias/search
+Content-Type: application/json
+
+{
+  "name": "Samsung Tv",
+  "seller": "Musimundo"
+}
 
 ###
 GET http://localhost:3000/categories

@@ -71,6 +71,7 @@ class ExpressServer {
 
   #registerRequestMiddleware() {
     this.app.use((req, res, next) => {
+      //TODO Add body to log
       logger.info(`[${req.method}] ${req.url}`)
       next()
     })

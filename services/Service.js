@@ -3,6 +3,13 @@ class Service {
     return {error, code};
   }
 
+  static badRequestResponse(message) {
+    return {
+      message: message,
+      code: 400
+    }
+  }
+
   static successResponse(payload, code = 200) {
     return {payload, code};
   }
