@@ -19,6 +19,15 @@ paths:
     get:
       description: Find all products
       operationId: findAllProducts
+      parameters:
+        - description: Tag to filter by
+          explode: true
+          in: query
+          name: tag
+          required: false
+          schema:
+            type: string
+          style: form
       responses:
         "200":
           content:
@@ -296,7 +305,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Tag'
+                  type: string
                 type: array
           description: Success
       tags:
@@ -391,17 +400,6 @@ paths:
       x-eov-operation-handler: controllers/AliasesController
 components:
   schemas:
-    Tag:
-      description: "A tag for the products in the catalog, used to group the products regardless of category."
-      example:
-        description: A display that is capable of using internet services, like Netflix.
-        id: SmartTv
-      properties:
-        id:
-          type: string
-        description:
-          type: string
-      type: object
     Category:
       description: A category of products in the catalog.
       example:
@@ -504,12 +502,8 @@ components:
       type: object
     MessageError:
       example:
-        code: 400
         message: The provided arguments are incorrect.
       properties:
-        code:
-          format: int32
-          type: integer
         message:
           type: string
       type: object

@@ -1,6 +1,9 @@
 ### find all products
 GET http://localhost:3000/products
 
+### find all products filtering by tag
+GET http://localhost:3000/products?tag=New
+
 ### find a specific product that does not exist
 GET http://localhost:3000/products/-1
 
@@ -78,8 +81,9 @@ Content-Type: application/json
   "type": "Incredible"
 }
 
+### find all tags
+GET http://localhost:3000/tags
+
 ###
 GET http://localhost:3000/products/search
 
-###
-GET http://localhost:3000/tags

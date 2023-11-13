@@ -1,20 +1,11 @@
 const Service = require('./Service');
+const productService = require('./ProductsService')
 
-/**
- * Collect all tags from available products
- *
- * returns List
- * */
 const findAllTags = () => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({}));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+    let products = productService.findAll();
+    let tags = new Set(products.flatMap(product => product.taggedBy));
+    resolve(Service.successResponse([...tags]));
   },
 );
 

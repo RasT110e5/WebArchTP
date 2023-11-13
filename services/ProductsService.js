@@ -140,9 +140,12 @@ const productArray = [
 const persistedProducts = new Map()
 productArray.forEach(product => persistedProducts.set(product.id, product))
 
-const findAllProducts = () => new Promise(
+const findAllProducts = ({tag}) => new Promise(
   async (resolve, reject) => {
-    resolve(Service.successResponse([...persistedProducts.values()]));
+    if (tag !== null)
+      resolve(Service.successResponse(findAll().filter(product => product.taggedBy.includes(tag))));
+    else
+      resolve(Service.successResponse(findAll()));
   },
 );
 
@@ -229,6 +232,10 @@ function saveNewProduct(body) {
   return newProduct;
 }
 
+function findAll() {
+  return [...persistedProducts.values()];
+}
+
 module.exports = {
   findAllProducts,
   createANewProduct,
@@ -237,5 +244,6 @@ module.exports = {
   modifyAProduct,
   searchProductsByModelAndAliases,
   existsById,
-  findProductById
+  findProductById,
+  findAll
 };
