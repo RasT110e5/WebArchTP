@@ -7,7 +7,7 @@ const Service = require('./Service');
  * categoryName String Name of the category to be deleted
  * no response value expected for this operation
  * */
-const categoriesCategoryNameDELETE = ({categoryName}) => new Promise(
+const deleteACategory = ({categoryName}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -28,7 +28,7 @@ const categoriesCategoryNameDELETE = ({categoryName}) => new Promise(
  * modifyParentCategoryDto ModifyParentCategoryDto  (optional)
  * returns Category
  * */
-const categoriesCategoryNamePUT = ({categoryName, modifyParentCategoryDto}) => new Promise(
+const modifyACategory = ({categoryName, modifyParentCategoryDto}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -48,7 +48,7 @@ const categoriesCategoryNamePUT = ({categoryName, modifyParentCategoryDto}) => n
  *
  * returns List
  * */
-const categoriesGET = () => new Promise(
+const findAllCategories = () => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({}));
@@ -66,7 +66,7 @@ const categoriesGET = () => new Promise(
  * createCategoryDto CreateCategoryDto  (optional)
  * no response value expected for this operation
  * */
-const categoriesPOST = ({createCategoryDto}) => new Promise(
+const createNewCategory = ({createCategoryDto}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -82,8 +82,8 @@ const categoriesPOST = ({createCategoryDto}) => new Promise(
 );
 
 module.exports = {
-  categoriesCategoryNameDELETE,
-  categoriesCategoryNamePUT,
-  categoriesGET,
-  categoriesPOST,
+  deleteACategory,
+  modifyACategory,
+  findAllCategories,
+  createNewCategory,
 };

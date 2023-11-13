@@ -8,26 +8,26 @@
 
 const Controller = require('./Controller');
 const service = require('../services/CategoriesService');
-const categoriesCategoryNameDELETE = async (request, response) => {
-  await Controller.handleRequest(request, response, service.categoriesCategoryNameDELETE);
+const deleteACategory = async (request, response) => {
+  await Controller.handleRequest(request, response, service.deleteACategory);
 };
 
-const categoriesCategoryNamePUT = async (request, response) => {
-  await Controller.handleRequest(request, response, service.categoriesCategoryNamePUT);
+const modifyACategory = async (request, response) => {
+  await Controller.handleRequest(request, response, service.modifyACategory);
 };
 
-const categoriesGET = async (request, response) => {
-  await Controller.handleRequest(request, response, service.categoriesGET);
+const findAllCategories = async (request, response) => {
+  await Controller.handleRequest(request, response, service.findAllCategories);
 };
 
-const categoriesPOST = async (request, response) => {
-  await Controller.handleRequest(request, response, service.categoriesPOST);
+const createNewCategory = async (request, response) => {
+  await Controller.handleRequest(request, response, service.createNewCategory);
 };
 
 
 module.exports = {
-  categoriesCategoryNameDELETE,
-  categoriesCategoryNamePUT,
-  categoriesGET,
-  categoriesPOST,
+  deleteACategory,
+  modifyACategory,
+  findAllCategories,
+  createNewCategory,
 };

@@ -6,7 +6,7 @@ const Service = require('./Service');
  *
  * returns List
  * */
-const tagsGET = () => new Promise(
+const findAllTags = () => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({}));
@@ -20,5 +20,5 @@ const tagsGET = () => new Promise(
 );
 
 module.exports = {
-  tagsGET,
+  findAllTags,
 };

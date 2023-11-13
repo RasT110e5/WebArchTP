@@ -8,7 +8,7 @@ const Service = require('./Service');
  * productId Integer The product id to mapped this alias to (optional)
  * returns Alias
  * */
-const aliasAliasNamePUT = ({aliasName, productId}) => new Promise(
+const mapAliasToProduct = ({aliasName, productId}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -29,7 +29,7 @@ const aliasAliasNamePUT = ({aliasName, productId}) => new Promise(
  * mappedOnly Boolean Flag to filter and bring only aliases mapped to a product (optional)
  * returns List
  * */
-const aliasGET = ({mappedOnly}) => new Promise(
+const findAllAliases = ({mappedOnly}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse([]));
@@ -47,7 +47,7 @@ const aliasGET = ({mappedOnly}) => new Promise(
  * alias String Alias to search by (optional)
  * returns Product
  * */
-const aliasSearchGET = ({alias}) => new Promise(
+const searchProductByAlias = ({alias}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -63,7 +63,7 @@ const aliasSearchGET = ({alias}) => new Promise(
 );
 
 module.exports = {
-  aliasAliasNamePUT,
-  aliasGET,
-  aliasSearchGET,
+  mapAliasToProduct,
+  findAllAliases,
+  searchProductByAlias,
 };

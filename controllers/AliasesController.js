@@ -8,21 +8,21 @@
 
 const Controller = require('./Controller');
 const service = require('../services/AliasesService');
-const aliasAliasNamePUT = async (request, response) => {
-  await Controller.handleRequest(request, response, service.aliasAliasNamePUT);
+const mapAliasToProduct = async (request, response) => {
+  await Controller.handleRequest(request, response, service.mapAliasToProduct);
 };
 
-const aliasGET = async (request, response) => {
-  await Controller.handleRequest(request, response, service.aliasGET);
+const findAllAliases = async (request, response) => {
+  await Controller.handleRequest(request, response, service.findAllAliases);
 };
 
-const aliasSearchGET = async (request, response) => {
-  await Controller.handleRequest(request, response, service.aliasSearchGET);
+const searchProductByAlias = async (request, response) => {
+  await Controller.handleRequest(request, response, service.searchProductByAlias);
 };
 
 
 module.exports = {
-  aliasAliasNamePUT,
-  aliasGET,
-  aliasSearchGET,
+  mapAliasToProduct,
+  findAllAliases,
+  searchProductByAlias,
 };

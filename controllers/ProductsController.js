@@ -8,36 +8,36 @@
 
 const Controller = require('./Controller');
 const service = require('../services/ProductsService');
-const productsGET = async (request, response) => {
-  await Controller.handleRequest(request, response, service.productsGET);
+const findAllProducts = async (request, response) => {
+  await Controller.handleRequest(request, response, service.findAllProducts);
 };
 
-const productsPOST = async (request, response) => {
-  await Controller.handleRequest(request, response, service.productsPOST);
+const createANewProduct = async (request, response) => {
+  await Controller.handleRequest(request, response, service.createANewProduct);
 };
 
-const productsProductIdDELETE = async (request, response) => {
-  await Controller.handleRequest(request, response, service.productsProductIdDELETE);
+const deleteAProduct = async (request, response) => {
+  await Controller.handleRequest(request, response, service.deleteAProduct);
 };
 
-const productsProductIdGET = async (request, response) => {
-  await Controller.handleRequest(request, response, service.productsProductIdGET);
+const getASpecificProduct = async (request, response) => {
+  await Controller.handleRequest(request, response, service.getASpecificProduct);
 };
 
-const productsProductIdPUT = async (request, response) => {
-  await Controller.handleRequest(request, response, service.productsProductIdPUT);
+const modifyAProduct = async (request, response) => {
+  await Controller.handleRequest(request, response, service.modifyAProduct);
 };
 
-const productsSearchGET = async (request, response) => {
-  await Controller.handleRequest(request, response, service.productsSearchGET);
+const searchProductsByModelAndAliases = async (request, response) => {
+  await Controller.handleRequest(request, response, service.searchProductsByModelAndAliases);
 };
 
 
 module.exports = {
-  productsGET,
-  productsPOST,
-  productsProductIdDELETE,
-  productsProductIdGET,
-  productsProductIdPUT,
-  productsSearchGET,
+  findAllProducts,
+  createANewProduct,
+  deleteAProduct,
+  getASpecificProduct,
+  modifyAProduct,
+  searchProductsByModelAndAliases,
 };

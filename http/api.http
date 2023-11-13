@@ -1,17 +1,17 @@
 ###
-GET http://localhost:3000/alias?test=unkown
+GET http://localhost:3000/alias
 
 ###
 GET http://localhost:3000/alias/search
 
 ###
-PUT http://localhost:3000/alias/{{aliasName}}
+PUT http://localhost:3000/alias/SamsungTv
 
 ###
 GET http://localhost:3000/categories
 
 ###
-DELETE http://localhost:3000/categories/{{categoryName}}
+DELETE http://localhost:3000/categories/Electronics
 
 ###
 GET http://localhost:3000/products
@@ -20,10 +20,10 @@ GET http://localhost:3000/products
 GET http://localhost:3000/products/search
 
 ###
-GET http://localhost:3000/products/{{productId}}
+GET http://localhost:3000/products/1
 
 ###
-DELETE http://localhost:3000/products/{{productId}}
+DELETE http://localhost:3000/products/1
 
 ###
 GET http://localhost:3000/tags
@@ -35,7 +35,7 @@ Content-Type: application/json
 {}
 
 ###
-PUT http://localhost:3000/categories/{{categoryName}}
+PUT http://localhost:3000/categories/Electronics
 Content-Type: application/json
 
 {}
@@ -47,7 +47,7 @@ Content-Type: application/json
 {}
 
 ###
-PUT http://localhost:3000/products/{{productId}}
+PUT http://localhost:3000/products/1
 Content-Type: application/json
 
 {}

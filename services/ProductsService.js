@@ -6,7 +6,7 @@ const Service = require('./Service');
  *
  * returns List
  * */
-const productsGET = () => new Promise(
+const findAllProducts = () => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({}));
@@ -24,7 +24,7 @@ const productsGET = () => new Promise(
  * modifyProductDto ModifyProductDto  (optional)
  * returns Product
  * */
-const productsPOST = ({modifyProductDto}) => new Promise(
+const createANewProduct = ({modifyProductDto}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -44,7 +44,7 @@ const productsPOST = ({modifyProductDto}) => new Promise(
  * productId Integer ID of the product to be deleted
  * no response value expected for this operation
  * */
-const productsProductIdDELETE = ({productId}) => new Promise(
+const deleteAProduct = ({productId}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -64,7 +64,7 @@ const productsProductIdDELETE = ({productId}) => new Promise(
  * productId Integer The ID of the product to get
  * returns Product
  * */
-const productsProductIdGET = ({productId}) => new Promise(
+const getASpecificProduct = ({productId}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -85,7 +85,7 @@ const productsProductIdGET = ({productId}) => new Promise(
  * modifyProductDto ModifyProductDto  (optional)
  * returns Product
  * */
-const productsProductIdPUT = ({productId, modifyProductDto}) => new Promise(
+const modifyAProduct = ({productId, modifyProductDto}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -106,7 +106,7 @@ const productsProductIdPUT = ({productId, modifyProductDto}) => new Promise(
  * query String Query string to search by (optional)
  * returns List
  * */
-const productsSearchGET = ({query}) => new Promise(
+const searchProductsByModelAndAliases = ({query}) => new Promise(
   async (resolve, reject) => {
     try {
       resolve(Service.successResponse({
@@ -122,10 +122,10 @@ const productsSearchGET = ({query}) => new Promise(
 );
 
 module.exports = {
-  productsGET,
-  productsPOST,
-  productsProductIdDELETE,
-  productsProductIdGET,
-  productsProductIdPUT,
-  productsSearchGET,
+  findAllProducts,
+  createANewProduct,
+  deleteAProduct,
+  getASpecificProduct,
+  modifyAProduct,
+  searchProductsByModelAndAliases,
 };

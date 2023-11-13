@@ -18,7 +18,7 @@ paths:
   /products:
     get:
       description: Find all products
-      operationId: productsGET
+      operationId: findAllProducts
       responses:
         "200":
           content:
@@ -33,7 +33,7 @@ paths:
       x-eov-operation-handler: controllers/ProductsController
     post:
       description: Creates a new product
-      operationId: productsPOST
+      operationId: createANewProduct
       requestBody:
         content:
           application/json:
@@ -60,7 +60,7 @@ paths:
   /products/{productId}:
     delete:
       description: Delete a product
-      operationId: productsProductIdDELETE
+      operationId: deleteAProduct
       parameters:
         - description: ID of the product to be deleted
           explode: false
@@ -90,7 +90,7 @@ paths:
       x-eov-operation-handler: controllers/ProductsController
     get:
       description: Get a specific product
-      operationId: productsProductIdGET
+      operationId: getASpecificProduct
       parameters:
         - description: The ID of the product to get
           explode: false
@@ -118,7 +118,7 @@ paths:
       x-eov-operation-handler: controllers/ProductsController
     put:
       description: Modify a product.
-      operationId: productsProductIdPUT
+      operationId: modifyAProduct
       parameters:
         - description: ID of the product to be deleted
           explode: false
@@ -154,7 +154,7 @@ paths:
   /products/search:
     get:
       description: Search products by model name and aliases
-      operationId: productsSearchGET
+      operationId: searchProductsByModelAndAliases
       parameters:
         - description: Query string to search by
           explode: true
@@ -179,7 +179,7 @@ paths:
   /categories:
     get:
       description: Find all categories
-      operationId: categoriesGET
+      operationId: findAllCategories
       responses:
         "200":
           content:
@@ -194,7 +194,7 @@ paths:
       x-eov-operation-handler: controllers/CategoriesController
     post:
       description: Creates a new category
-      operationId: categoriesPOST
+      operationId: createNewCategory
       requestBody:
         content:
           application/json:
@@ -217,7 +217,7 @@ paths:
   /categories/{categoryName}:
     delete:
       description: Delete a category
-      operationId: categoriesCategoryNameDELETE
+      operationId: deleteACategory
       parameters:
         - description: Name of the category to be deleted
           explode: false
@@ -247,7 +247,7 @@ paths:
       x-eov-operation-handler: controllers/CategoriesController
     put:
       description: Modify a category
-      operationId: categoriesCategoryNamePUT
+      operationId: modifyACategory
       parameters:
         - description: The category name that will change its parent category
           explode: false
@@ -284,7 +284,7 @@ paths:
   /tags:
     get:
       description: Collect all tags from available products
-      operationId: tagsGET
+      operationId: findAllTags
       responses:
         "200":
           content:
@@ -300,7 +300,7 @@ paths:
   /alias:
     get:
       description: Find all product aliases
-      operationId: aliasGET
+      operationId: findAllAliases
       parameters:
         - description: Flag to filter and bring only aliases mapped to a product
           explode: true
@@ -321,12 +321,11 @@ paths:
           description: Success
       tags:
         - Aliases
-      x-eov-operation-id: aliasGET
       x-eov-operation-handler: controllers/AliasesController
   /alias/{aliasName}:
     put:
       description: Map an alias to a product
-      operationId: aliasAliasNamePUT
+      operationId: mapAliasToProduct
       parameters:
         - description: The name of the alias to map
           explode: false
@@ -364,7 +363,7 @@ paths:
     get:
       description: Find a product by alias only and create the alias if a product
         is not found
-      operationId: aliasSearchGET
+      operationId: searchProductByAlias
       parameters:
         - description: Alias to search by
           explode: true
