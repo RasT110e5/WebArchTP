@@ -10,11 +10,39 @@ GET http://localhost:3000/products/10
 ### delete a speciifc product
 DELETE http://localhost:3000/products/10
 
-###
+### create a new product with an invalid category
 POST http://localhost:3000/products
 Content-Type: application/json
 
-{}
+{
+  "marketPrice": 94.00,
+  "creator": "Roque Sosa",
+  "weight": 773.00,
+  "model": "Towels",
+  "taggedBy": [
+    "On-Sale",
+    "Excellent Quality"
+  ],
+  "category": "asdfasdfLKJASDF",
+  "type": "Incredible"
+}
+
+### create a new product
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "marketPrice": 94.00,
+  "creator": "Roque Sosa",
+  "weight": 773.00,
+  "model": "Towels",
+  "taggedBy": [
+    "On-Sale",
+    "Excellent Quality"
+  ],
+  "category": "Bath",
+  "type": "Incredible"
+}
 
 ###
 PUT http://localhost:3000/products/1

@@ -102,4 +102,5 @@ module.exports = {
   modifyACategory,
   findAllCategories,
   createNewCategory,
+  categoryExists
 };

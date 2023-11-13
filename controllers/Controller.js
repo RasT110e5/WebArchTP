@@ -104,7 +104,6 @@ class Controller {
       Controller.sendResponse(response, serviceResponse);
     } catch (error) {
       logger.error("Error while processing request", error)
-      logger.error(error.stack)
       Controller.sendError(response, error);
     }
   }

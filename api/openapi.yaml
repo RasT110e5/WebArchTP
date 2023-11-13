@@ -480,6 +480,10 @@ components:
         model: Samsung HD 46" TV
         category: Display
         type: High-End Electronic
+        taggedBy:
+          - New
+          - On-Sale
+        creator: Roque Sosa
       properties:
         model:
           type: string
@@ -489,8 +493,14 @@ components:
           type: number
         type:
           type: string
+        creator:
+          type: string
         marketPrice:
           type: number
+        taggedBy:
+          type: array
+          items:
+            type: string
       type: object
     MessageError:
       example:

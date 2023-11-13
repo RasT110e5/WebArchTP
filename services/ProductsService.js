@@ -1,4 +1,5 @@
 const Service = require('./Service');
+const categoryService = require('./CategoriesService')
 
 const productArray = [
   {
@@ -145,11 +146,14 @@ const findAllProducts = () => new Promise(
   },
 );
 
-const createANewProduct = ({modifyProductDto}) => new Promise(
+const createANewProduct = ({body}) => new Promise(
   async (resolve, reject) => {
-    resolve(Service.successResponse({
-      modifyProductDto,
-    }));
+    if (!categoryService.categoryExists(body.category))
+      reject(Service.badRequestResponse(`Category with name ${body.category} does not exist`))
+    else {
+      let newProduct = saveNewProduct(body);
+      resolve(Service.createdResponse(newProduct))
+    }
   },
 );
 
@@ -188,6 +192,22 @@ const searchProductsByModelAndAliases = ({query}) => new Promise(
     }));
   },
 );
+
+function saveNewProduct(body) {
+  const nextId = [...persistedProducts.keys()].reduce((a, b) => Math.max(a, b), -Infinity) + 1;
+  let newProduct = {
+    id: nextId,
+    markerPrice: body.markerPrice,
+    creator: body.creator,
+    weight: body.weight,
+    model: body.model,
+    taggedBy: body.taggedBy,
+    category: body.category,
+    type: body.type,
+  }
+  persistedProducts.set(newProduct.id, newProduct)
+  return newProduct;
+}
 
 module.exports = {
   findAllProducts,
