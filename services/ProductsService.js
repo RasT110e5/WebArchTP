@@ -142,7 +142,7 @@ productArray.forEach(product => persistedProducts.set(product.id, product))
 
 const findAllProducts = ({tag}) => new Promise(
   async (resolve, reject) => {
-    if (tag !== null)
+    if (tag !== undefined)
       resolve(Service.successResponse(findAll().filter(product => product.taggedBy.includes(tag))));
     else
       resolve(Service.successResponse(findAll()));
@@ -210,9 +210,8 @@ const modifyAProduct = ({productId, body}) => new Promise(
 
 const searchProductsByModelAndAliases = ({query}) => new Promise(
   async (resolve, reject) => {
-    resolve(Service.successResponse({
-      query,
-    }));
+    let results = findAll().filter(product => product.model.includes(query) || product.aliases.includes(query))
+    resolve(Service.successResponse(results));
   },
 );
 
@@ -236,6 +235,11 @@ function findAll() {
   return [...persistedProducts.values()];
 }
 
+function mapProduct(productId, name) {
+  let product = findProductById(productId)
+  product.aliases.push(name)
+}
+
 module.exports = {
   findAllProducts,
   createANewProduct,
@@ -245,5 +249,6 @@ module.exports = {
   searchProductsByModelAndAliases,
   existsById,
   findProductById,
-  findAll
+  findAll,
+  mapProduct
 };

@@ -167,9 +167,10 @@ paths:
       parameters:
         - description: Query string to search by
           explode: true
+          allowReserved: true
           in: query
           name: query
-          required: false
+          required: true
           schema:
             type: string
           style: form

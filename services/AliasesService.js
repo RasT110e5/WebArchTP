@@ -58,6 +58,7 @@ const mapAliasToProduct = ({aliasId, productId}) => new Promise(
         if (!productService.existsById(productId)) {
           reject(Service.badRequestResponse(`Product with id ${productId} could not be found`))
         } else {
+          productService.mapProduct(productId, aliasToMap.name)
           aliasToMap.mappedTo = productId
           resolve(Service.successResponse(aliasToMap));
         }

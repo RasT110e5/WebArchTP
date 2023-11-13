@@ -84,6 +84,11 @@ Content-Type: application/json
 ### find all tags
 GET http://localhost:3000/tags
 
-###
-GET http://localhost:3000/products/search
+### find products by model
+GET http://localhost:3000/products/search?query=Tuna
 
+### find products by alias
+GET http://localhost:3000/products/search?query=Rustic%20Fresh%20Ball
+
+### find products with a very vague query
+GET http://localhost:3000/products/search?query=a
